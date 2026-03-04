@@ -4,9 +4,12 @@ use godot::prelude::*;
 #[derive(GodotClass)]
 #[class(base=Area2D)]
 pub struct Player {
+    /// How fast the player moves in meters per second.
+    #[export]
     speed: real,
+    /// The size of the viewport in pixels.
     screen_size: Vector2,
-
+    /// The base node of the player.
     base: Base<Area2D>,
 }
 
@@ -18,13 +21,21 @@ impl Player {
 
     #[func]
     fn on_player_body_entered(&mut self, _body: Gd<Node2D>) {
+        // 看起来要做到什么和引擎有关的事都需要借用基类来进行，倒是在GDScript之中
+        // 是可以直接调用的，现在想起来是当然的，因为GDScript实际上也可以算作一个面向
+        // 对象的语言，而在这里Rust实际上是在模拟面向对象，所以隐式的调用父类的方式在这
+        // 里必须是显式的
         self.base_mut().hide();
         self.signals().hit().emit();
 
+        // 在GDScript之中，这里直接使用了`$CollisionShape2D`来获取节点，这是语法糖
+        // 展开之后就是`get_node("CollisionShape2D")`，Rust之中没有这种语法糖
         let mut collision_shape = self
             .base()
             .get_node_as::<CollisionShape2D>("CollisionShape2D");
 
+        // 在当前帧的末尾，将给定属性`propertye`的值分配为对应的`value`，因为在引擎的碰撞处理过程中
+        // 禁用区域的碰撞形状可能会导致错误。需要告诉Godot等待可以安全地禁用形状时再这样做
         collision_shape.set_deferred("disabled", &true.to_variant());
     }
 

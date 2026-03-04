@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://4vwrqjegqwpj"]
+[gd_scene format=3 uid="uid://4vwrqjegqwpj"]
 
-[ext_resource type="Texture2D" uid="uid://fv7465xtdfrt" path="res://art/playerGrey_walk1.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://hevh85f2yn3r" path="res://art/playerGrey_walk2.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://t2fv5qiirqi0" path="res://art/playerGrey_up1.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://6peej6haih3j" path="res://art/playerGrey_up2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b2aofu01vxvea" path="res://art/playerGrey_walk1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ddjou2q6gxlfr" path="res://art/playerGrey_walk2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bcow5c46vixno" path="res://art/playerGrey_up1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dw3lwgwhpbfx8" path="res://art/playerGrey_up2.png" id="5"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -52,19 +52,19 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("6")
 color_ramp = SubResource("4")
 
-[node name="Player" type="Player"]
-visible = false
+[node name="Player" type="Player" unique_id=49759953]
 z_index = 10
+metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1157575014]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("1")
 animation = &"right"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1948119565]
 shape = SubResource("2")
 
-[node name="Trail" type="GPUParticles2D" parent="."]
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=547085031]
 z_index = -1
 amount = 10
 texture = ExtResource("2")

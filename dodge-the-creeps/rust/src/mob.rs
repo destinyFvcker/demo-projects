@@ -1,3 +1,5 @@
+//! 玩家必须躲避的敌人，它们的行为很简单：怪物将随机生成在屏幕的边缘，沿着随机的方向进行直线移动
+
 use godot::classes::{AnimatedSprite2D, IRigidBody2D, RigidBody2D};
 use godot::prelude::*;
 
@@ -34,6 +36,7 @@ impl IRigidBody2D for Mob {
     }
 
     fn ready(&mut self) {
+        // 从三个动画类型之中随机选择一个进行播放
         let mut sprite = self
             .base()
             .get_node_as::<AnimatedSprite2D>("AnimatedSprite2D");
