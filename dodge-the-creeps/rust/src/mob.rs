@@ -47,6 +47,6 @@ impl IRigidBody2D for Mob {
         let anim_names = anim_names.to_typed_array();
         let animation_name = anim_names.pick_random().unwrap();
 
-        sprite.set_animation(animation_name.arg());
+        sprite.set_animation(&Into::<StringName>::into(&animation_name));
     }
 }
